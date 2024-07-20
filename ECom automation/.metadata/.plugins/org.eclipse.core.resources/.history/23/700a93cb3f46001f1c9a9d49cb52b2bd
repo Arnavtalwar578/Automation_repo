@@ -19,7 +19,6 @@ public class MenTShirtsPageMyntra {
 	
 	public MenTShirtsPageMyntra(WebDriver driver) {
 		this.driver = driver;
-		
 	}
 	
 	public void filterByBrand(String brandName) {
