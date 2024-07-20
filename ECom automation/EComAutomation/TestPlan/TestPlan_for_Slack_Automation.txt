@@ -1,0 +1,53 @@
+1. Create a New Channel
+
+	Positive Cases:
+		1. Valid Channel Name: Create a channel with a valid name (e.g., "test-channel").
+		2. Unique Channel Name: Create a channel with a unique name that doesn't already exist.
+	Negative Cases:
+		1. Duplicate Channel Name: Attempt to create a channel with a name that already exists.
+		2. Empty Channel Name: Try to create a channel with an empty or null name.
+		3. Invalid Characters in Channel Name: Use invalid characters in the channel name (e.g., special characters not allowed).
+	Edge Cases:
+		1. Maximum Channel Name Length: Create a channel with the maximum allowed length for the name.
+	
+
+2. Join the Newly Created Channel
+
+	Positive Cases:
+		1. Valid Channel ID: Join a channel using a valid channel ID.
+	Negative Cases:
+		1. Invalid Channel ID: Attempt to join a channel using an invalid or non-existent channel ID.
+		2. Already Joined: Try to join a channel that the user is already a member of.
+	Edge Cases:
+		1. Permissions Issue: Attempt to join a channel with a user who doesn't have the required permissions.
+
+
+3. Rename the Channel
+	Positive Cases:
+		1. Valid New Name: Rename a channel to a valid, unique name.
+		2. Channel Exists: Rename an existing channel successfully.
+	Negative Cases:
+		1. Invalid New Name: Attempt to rename the channel to an invalid name (e.g., too long or with special characters).
+		2. Non-Existent Channel: Try renaming a channel that doesn’t exist.
+	Edge Cases:
+		1. Maximum Channel Name Length: Rename the channel to the maximum allowed length for the name.
+
+4. List All Channels and Validate Name Change
+	Positive Cases:
+		1. Successful Listing: List all channels and verify that the channel name has changed successfully.
+		2. Valid Data: Ensure that the channel list returned is accurate and includes the updated channel name.
+	Negative Cases:
+		1. No Channels Available: List channels when there are no channels available.
+		2. API Error: Simulate an API error when listing channels and verify proper handling.
+	Edge Cases:
+		1. Large Number of Channels: Test listing channels when there are a large number of channels to ensure performance.
+
+5. Archive the Channel
+	Positive Cases:
+		1. Valid Channel ID: Archive a channel using a valid channel ID.
+		2. Channel Exists: Successfully archive an existing channel.
+	Negative Cases:
+		1. Invalid Channel ID: Attempt to archive a channel using an invalid or non-existent channel ID.
+		2. Already Archived: Try to archive a channel that is already archived.
+	Edge Cases:
+		1. Permissions Issue: Attempt to archive a channel with a user who doesn’t have the required permissions.

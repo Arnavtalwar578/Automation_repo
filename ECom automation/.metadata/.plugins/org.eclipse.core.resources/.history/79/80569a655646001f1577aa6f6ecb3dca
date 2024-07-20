@@ -1,0 +1,98 @@
+Positive Cases
+	1. Valid Input Dataset
+	
+	Scenario: city.csv contains a list of cities with valid names.
+	Expected Result: The system correctly retrieves weather data for each city, calculates the top N coldest cities and the top N cities with the highest humidity, and writes the correct data to city_stats.csv.
+	2. Default Number of Cities (N=3)
+	
+	Scenario: Default value for N is used when not specified in the input.
+	Expected Result: The system returns the top 3 coldest cities and top 3 cities with the highest humidity.
+	3. Valid API Key
+	
+	Scenario: API key used is valid and has the necessary permissions.
+	Expected Result: The API calls succeed, and the weather data is retrieved and processed without errors.
+	4. Handling Large Input Dataset
+	
+	Scenario: city.csv contains a large number of cities.
+	Expected Result: The system can handle the large dataset and correctly processes the top N cities for both coldest temperatures and highest humidity.
+	5. Different Temperature and Humidity Thresholds
+	
+	Scenario: Different threshold values are used to get the top N coldest cities and highest humidity cities.
+	Expected Result: The system correctly adjusts to different thresholds and returns accurate results.
+
+Negative Cases
+	1. Empty city.csv File
+	
+	Scenario: city.csv is empty or does not contain any city names.
+	Expected Result: The system should handle this gracefully, potentially by logging an error or providing a user-friendly message.
+	2. Invalid City Names
+	
+	Scenario: city.csv contains invalid or non-existent city names.
+	Expected Result: The system should handle invalid city names by either skipping them or reporting them as errors.
+	3. Invalid API Key
+	
+	Scenario: The API key used is invalid or expired.
+	Expected Result: The system should handle API authentication errors by logging an appropriate message or exception.
+	4. API Rate Limit Exceeded
+	
+	Scenario: The number of API requests exceeds the allowed rate limit.
+	Expected Result: The system should handle rate-limiting errors by implementing retries or reporting the issue.
+	5. API Endpoint Changes
+	
+	Scenario: The API endpoint changes or becomes deprecated.
+	Expected Result: The system should handle endpoint changes by catching exceptions and providing meaningful error messages.
+	6. Failed Data Retrieval
+	
+	Scenario: The API call fails due to network issues or server errors.
+	Expected Result: The system should handle failures gracefully and retry or log the error.
+	Edge Cases
+	7. Cities with Extreme Weather Conditions
+	
+	Scenario: Cities with extremely high or low temperatures and humidity values.
+	Expected Result: The system should correctly handle and display extreme values.
+	8. Incorrect Data Format in city.csv
+	
+	Scenario: The city.csv file contains incorrectly formatted data (e.g., missing columns, invalid CSV format).
+	Expected Result: The system should handle format errors and provide appropriate feedback.
+
+Test Plan
+	1. Test Case: Valid Input Dataset
+	
+	Input: city.csv with valid city names.
+	Expected Output: Correct weather statistics in city_stats.csv.
+	2. Test Case: Default Number of Cities (N=3)
+	
+	Input: city.csv with valid city names and no specified N.
+	Expected Output: Top 3 coldest and top 3 cities with highest humidity.
+	3. Test Case: Invalid City Names
+	
+	Input: city.csv with invalid city names.
+	Expected Output: Errors or warnings for invalid cities, and valid cities processed.
+	4. Test Case: Empty city.csv File
+	
+	Input: Empty city.csv.
+	Expected Output: Graceful handling with appropriate message or logging.
+	5. Test Case: Invalid API Key
+	
+	Input: Invalid API key.
+	Expected Output: Error handling for authentication failure.
+	6. Test Case: API Rate Limit Exceeded
+	
+	Input: Exceed rate limit.
+	Expected Output: Handling of rate limiting, retries or error reporting.
+	7. Test Case: Incorrect Data Format in city.csv
+	
+	Input: city.csv with format issues.
+	Expected Output: Error handling and format validation.
+	8. Test Case: Cities with Extreme Weather Conditions
+	
+	Input: Cities with extreme weather.
+	Expected Output: Correct handling of extreme values.
+	9. Test Case: Handling Different Units
+	
+	Input: Weather data in different units.
+	Expected Output: Correct conversion and interpretation of units.
+	10. Test Case: Special Characters in City Names
+	
+	Input: City names with special characters.
+	Expected Output: Accurate retrieval and handling of special characters.

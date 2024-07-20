@@ -15,23 +15,20 @@ public class SlackTest {
 
     @BeforeClass
     public void setUp() {
-        String token = "your-slack-api-token"; // Replace with your token
+        String token = "slack-api-token"; 
         apiUtils = new SlackAPIUtils(token);
         channelManager = new ChannelManager(apiUtils);
     }
 
     @Test
     public void testCreateAndRenameChannel() throws IOException, java.io.IOException {
-        // Create a new channel
         JSONObject createResponse = channelManager.createChannel("test-channel");
         Assert.assertTrue(createResponse.getBoolean("ok"), "Channel creation failed");
         testChannelId = createResponse.getJSONObject("channel").getString("id");
 
-        // Rename the channel
         JSONObject renameResponse = channelManager.renameChannel(testChannelId, "new-test-channel");
         Assert.assertTrue(renameResponse.getBoolean("ok"), "Channel renaming failed");
 
-        // List channels and verify the name change
         JSONObject listResponse = channelManager.listChannels();
         Assert.assertTrue(listResponse.getBoolean("ok"), "Listing channels failed");
         boolean nameChanged = false;
@@ -49,11 +46,9 @@ public class SlackTest {
 
     @Test
     public void testArchiveChannel() throws IOException, java.io.IOException {
-        // Archive the channel
         JSONObject archiveResponse = channelManager.archiveChannel(testChannelId);
         Assert.assertTrue(archiveResponse.getBoolean("ok"), "Channel archiving failed");
 
-        // Validate if the channel is archived
         JSONObject listResponse = channelManager.listChannels();
         Assert.assertTrue(listResponse.getBoolean("ok"), "Listing channels failed");
         boolean channelArchived = true;

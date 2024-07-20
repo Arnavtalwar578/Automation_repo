@@ -1,0 +1,82 @@
+Positive Test Cases
+	1. Single Valid Customer ID
+	
+		Input: 1
+		Expected Outcome:
+		An SMS is sent with the text "Sending the SMS to customer ID 1, src=src and dst=dst1".
+		The message should be successfully queued.
+		The message details are correctly documented in result.txt.
+	2. Multiple Valid Customer IDs
+	
+		Input: 1,2
+		Expected Outcome:
+		Two SMSs are sent:
+		"Sending the SMS to customer ID 1, src=src and dst=dst1"
+		"Sending the SMS to customer ID 2, src=src and dst=dst2"
+		Both messages should be successfully queued.
+		Message details for both should be documented in result.txt.
+	3. All IDs Provided
+	
+		Input: 1,2,3,4
+		Expected Outcome:
+		Four SMSs are sent:
+		"Sending the SMS to customer ID 1, src=src and dst=dst1"
+		"Sending the SMS to customer ID 2, src=src and dst=dst2"
+		"Sending the SMS to customer ID 3, src=src and dst=dst3"
+		"Sending the SMS to customer ID 4, src=src and dst=dst4"
+		All messages should be successfully queued.
+		Details for all messages should be documented in result.txt.
+
+Negative Test Cases
+
+	1. Invalid Customer ID
+	
+	Input: 5
+	Expected Outcome:
+	An error or no message is sent.
+	The system should handle the invalid ID gracefully.
+	result.txt should either indicate an error or be empty.
+	2. Non-Numeric Input
+	
+	Input: abc
+	Expected Outcome:
+	An error or no message is sent.
+	The system should validate and handle non-numeric input appropriately.
+	result.txt should either indicate an error or be empty.
+	Empty Input
+	
+	Input: ``
+	Expected Outcome:
+	No message should be sent.
+	The system should handle empty input gracefully.
+	result.txt should be empty or indicate no action taken.
+	3. Invalid CSV File Format
+	
+	Scenario: The CSV file is missing required columns or has incorrect formatting.
+	Expected Outcome:
+	The system should handle the malformed CSV and provide a meaningful error message.
+	No messages should be sent.
+	result.txt should document the error related to the CSV file format.
+	Edge Test Cases
+	4. CSV File with No Data
+	
+	Scenario: The customer_message.csv file is empty.
+	Input: Any valid ID.
+	Expected Outcome:
+	No message should be sent.
+	The system should handle the situation gracefully.
+	result.txt should indicate that no data was found in the CSV file.
+	Large Number of IDs
+	
+	Input: A large list of IDs (e.g., 1,2,3,...,1000)
+	Expected Outcome:
+	The system should be able to handle a large number of IDs and send the appropriate number of SMSs.
+	5. Messages should be successfully queued.
+	All message details should be documented in result.txt.
+	Special Characters in Message
+	
+	Input: 1 with a message containing special characters like emojis or symbols.
+	Expected Outcome:
+	The SMS should be sent correctly with the special characters.
+	The message should be queued successfully.
+	result.txt should show the message details including special characters.
