@@ -1,0 +1,53 @@
+package pages;
+import java.time.Duration;
+import java.util.List;
+import java.util.*;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class MenTShirtsPageMyntra {
+	
+	WebDriver driver;
+	By brandSearchOption = By.xpath("//*[@id=\"mountRoot\"]/div/main/div[3]/div[1]/section/div/div[3]/div[1]/span");
+	By branchSearchBox = By.xpath("//input[@class='filter-search-inputBox' and @placeholder='Search for Brand']");
+	By vanHeusenOption = By.xpath("//label[text()='Van Heusen']");
+	By productCards = By.xpath("//li[@class=\"product-base\"]"); 
+	
+	public MenTShirtsPageMyntra(WebDriver driver) {
+		this.driver = driver;
+	}
+	
+	public void filterByBrand(String brandName) {
+		driver.findElement(brandSearchOption).click();
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
+		WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(branchSearchBox));
+		searchBox.sendKeys(brandName);
+		wait.until(ExpectedConditions.elementToBeClickable(vanHeusenOption)).click();
+	}
+	
+	public List<ProductMyntra> getDiscountedProducts() {
+        List<ProductMyntra> discountedProducts = new ArrayList<>();
+        List<WebElement> tShirtElements = driver.findElements(productCards);
+
+        for (WebElement item : tShirtElements) {
+            String productName = item.findElement(By.xpath("//h4[@class=\"product-product\"]")).getText();
+            String productPrice = item.findElement(By.xpath("//span[@class=\"product-discountedPrice\"]")).getText();
+            String productLink = item.findElement(By.xpath("a")).getAttribute("href");
+
+            WebElement discountElement = item.findElement(By.xpath("//span[@class=\\\"product-discountPercentage\\\"]"));
+            if (discountElement != null) {
+                String discountText = discountElement.getText().replaceAll("[^0-9]", ""); 
+                int discountPercentage = Integer.parseInt(discountText);
+                discountedProducts.add(new ProductMyntra(productName, productPrice, discountPercentage, productLink));
+            }
+        }
+
+        discountedProducts.sort((p1, p2) -> p2.getDiscountPercentage() - p1.getDiscountPercentage());
+        return discountedProducts;
+    }
+	
+}

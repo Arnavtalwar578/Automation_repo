@@ -1,0 +1,58 @@
+package tests;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+
+import pages.HomePageMyntra;
+import pages.MenTShirtsPageMyntra;
+import pages.ProductMyntra;
+
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+public class TestMyntra {
+    WebDriver driver;
+    @SuppressWarnings("deprecation")
+	@BeforeClass
+    public void setUp() {
+    	try {
+            
+            System.setProperty("webdriver.chrome.driver", "/Users/atalwar/Downloads/chromedriver-mac-x64/chromedriver");
+            ChromeOptions options = new ChromeOptions();
+//            options.addArguments("--headless");
+            driver = new ChromeDriver(options); 
+            driver.manage().window().maximize(); 
+            driver.get("https://www.myntra.com");
+            
+            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void testTShirts() throws InterruptedException {
+    	HomePageMyntra homePage = new HomePageMyntra(driver);
+        homePage.hoverOverMenMenu();
+        homePage.clickOnFirstTShirtOption();
+        MenTShirtsPageMyntra menTShirtsPage = new MenTShirtsPageMyntra(driver);
+        menTShirtsPage.filterByBrand("Van Heusen");
+        List<ProductMyntra> products = menTShirtsPage.getDiscountedProducts();
+        for (ProductMyntra product : products) {
+            System.out.println(product);
+        }
+    }
+    @AfterClass
+    public void tearDown() {
+        if (driver != null) {
+//            driver.quit();
+        }
+    }
+}
+
+
+
+
