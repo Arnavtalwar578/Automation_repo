@@ -1,0 +1,5 @@
+package slack_automation;
+
+public class ChannelManager {
+
+}

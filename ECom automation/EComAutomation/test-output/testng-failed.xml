@@ -3,13 +3,16 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="tests.TestMyntra">
+      <class name="weather.WeatherServiceTest">
         <methods>
-          <include name="testTShirts"/>
+          <include name="testTopNColdestCities"/>
           <include name="setUp"/>
-          <include name="tearDown"/>
+          <include name="testTopNHighestHumidityCities"/>
+          <include name="testGetCityCoordinates"/>
+          <include name="testGetWeatherStats"/>
+          <include name="testSaveStatsToCSV"/>
         </methods>
-      </class> <!-- tests.TestMyntra -->
+      </class> <!-- weather.WeatherServiceTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

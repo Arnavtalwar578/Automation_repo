@@ -1,0 +1,5 @@
+"ID","SourceNumber","DestinationNumber","Message"
+"1","src","dst1","Sending the SMS to customer ID 1"
+"2","src","dst2","Sending the SMS to customer ID 2"
+"3","src","dst3","Sending the SMS to customer ID 3"
+"4","src","dst4","Sending the SMS to customer ID 4"

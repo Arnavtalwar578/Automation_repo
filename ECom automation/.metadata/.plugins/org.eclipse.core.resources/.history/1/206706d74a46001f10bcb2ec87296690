@@ -1,0 +1,38 @@
+package weather;
+
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvValidationException;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CSVUtil {
+    public static List<String> readCities(String csvFile) throws CsvValidationException {
+        List<String> cities = new ArrayList<>();
+        try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
+            String[] line;
+            while ((line = reader.readNext()) != null) {
+                cities.add(line[0]);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return cities;
+    }
+
+    public static void writeStats(String csvFile, List<CityStats> stats) {
+        try (CSVWriter writer = new CSVWriter(new FileWriter(csvFile))) {
+            String[] header = {"City", "Temperature", "Humidity"};
+            writer.writeNext(header);
+            for (CityStats stat : stats) {
+                writer.writeNext(new String[]{stat.getName(), String.valueOf(stat.getTemperature()), String.valueOf(stat.getHumidity())});
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}

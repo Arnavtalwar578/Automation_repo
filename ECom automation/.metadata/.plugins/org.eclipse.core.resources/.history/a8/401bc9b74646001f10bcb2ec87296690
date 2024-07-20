@@ -1,0 +1,15 @@
+package pages;
+import java.util.List;
+
+import com.opencsv.exceptions.CsvValidationException;
+import com.plivo.api.exceptions.PlivoValidationException;
+
+public class Main {
+	public static void main(String[] args) throws CsvValidationException, PlivoValidationException {
+        CSVUtil.createCSV();
+        String[] customerIDs = InputUtil.getCustomerIDs();
+        List<String[]> messages = MessageUtil.readCSV(customerIDs);
+        PlivoUtil.sendSMS(messages);
+    }
+
+}

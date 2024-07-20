@@ -1,0 +1,19 @@
+package pages;
+import java.util.List;
+
+public class Main {
+	public static void main(String[] args) {
+        // Step 1: Create and populate CSV file
+        CSVUtil.createCSV();
+
+        // Step 2: Accept customer IDs as input
+        String[] customerIDs = InputUtil.getCustomerIDs();
+
+        // Step 3: Read CSV and frame the message body
+        List<String[]> messages = MessageUtil.readCSV(customerIDs);
+
+        // Step 4: Send SMS using Plivo API
+        PlivoUtil.sendSMS(messages);
+    }
+
+}

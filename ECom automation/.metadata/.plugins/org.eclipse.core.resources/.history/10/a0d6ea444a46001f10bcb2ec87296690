@@ -1,0 +1,29 @@
+package weather;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+public class Main {
+    private static final String API_KEY = "your_actual_api_key";
+    private static final String CITY_CSV = "city.csv";
+    private static final String STATS_CSV = "city_stats.csv";
+    private static final int TOP_N = 3;
+
+    public static void main(String[] args) {
+        WeatherService weatherService = new WeatherService(API_KEY);
+
+        // Read cities from CSV
+        List<String> cityNames = CSVUtil.readCities(CITY_CSV);
+
+        List<CityStats> cityStatsList = new ArrayList<>();
+        for (String cityName : cityNames) {
+            try {
+                City city = weatherService.getCityCoordinates(cityName);
+                CityStats stats = weatherService.getWeatherStats(city);
+                cityStatsList.add(stats);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }}}
